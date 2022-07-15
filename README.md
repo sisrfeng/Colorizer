@@ -1,5 +1,6 @@
 Colorizer [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/cb%40256bit.org)
 =========
+
 > A plugin to color colornames and codes
 
 ![screenshot of the plugin](screenshot.png "Screenshot")

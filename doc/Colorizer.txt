@@ -34,7 +34,7 @@ Contents                                                        *Colorizer*
             2.11 Use custom colornames...............|Colorizer-custom-colornames|
             2.12 Colorizing :hi statements...........|Colorizer-vim-hi|
             2.13 Disable BufLeave autocomannd........|Colorizer-BufLeave|
-            2.14 Control which autocommands trigger  |Colorizer-autocommands| 
+            2.14 Control which autocommands trigger  |Colorizer-autocommands|
             2.15 Rendering colors as virtual text....|Colorizer-virtual-text|
             2.16 Customizing conceal settings........|Colorizer-conceal|
     3.  Colorizer Mappings...........................|Colorizer-maps|
@@ -61,13 +61,13 @@ representation like hvl(H,V,L)
 It works best in the gui version of Vim, but the plugin also supports 256 and
 88 color terminals and translates the colors to those supported by the
 terminal. 16 and 8 color terminals should work theoretically too, but have not
-been widely tested. Note that translating the colors to the terminal might
+been widely tested. Translating the colors to the terminal might
 impose a performance penalty, depending on the terminal type and the number of
 matches in the file.
 
 This plugin defines the following commands:
 
-                                                              *:ColorHighlight*
+*:ColorHighlight*
 :[range]ColorHighlight[!] [args]
 
 Scan the lines given by [range] for color code names and highlight those. If
@@ -81,10 +81,10 @@ highlighting to syntax highlighting. This is useful, so a plugin like
 "match", which uses the |matchadd()| function. (Prepending "no" is
 supported and will disable that setting and use the opposite).
 
-                                                                 *:ColorClear*
+*:ColorClear*
 :ColorClear                 Turn off color highlighting.
 
-                                                                 *:RGB2Term*
+*:RGB2Term*
 :RGB2Term <color>           Translate the color code given as argument to
                             the closest color that can be displayed in the
                             terminal. The color must be given in the
@@ -95,30 +95,30 @@ supported and will disable that setting and use the opposite).
                             Uses the number of colors your terminal is capable
                             of (or 256 colors for gVim).
 
-                                                                *:HSL2RGB*
+*:HSL2RGB*
 :HSL2RGB hsl(h,v,l)         Translate the HVL color defined by the string
                             'hsl(h,v%,l%)' into a color that the current
-                            terminal can display. Note that the color must be
+                            terminal can display. The color must be
                             given in the format 'hsl(HH, V, L)' where HH
                             defines the Hue as absolute value between 0 and
                             255 and V and L represent a percentage for value
                             and Lightness.
 
-                                                                *:Term2RGB*
+*:Term2RGB*
 :Term2RGB number            Translate terminal color <number> to an RGB color
                             (using the xterm 256 color cube).
 
-                                                             *:ColorContrast*
+*:ColorContrast*
 :ColorContrast              Switch between all different color contrast
                             settings (foreground colors).
-                                                             *:ColorSwapFgBg*
+*:ColorSwapFgBg*
 :ColorSwapFgBg              Switch between foreground and background colors.
                             This will toggle in 3 ways. From Swapping
                             foreground and background colors, to only
                             highlighting the foreground color back to normal
                             foreground background color.
 
-                                                              *:ColorToggle*
+*:ColorToggle*
 :ColorToggle                Switch between highlighting colors and no
                             highlighting.
 
@@ -130,12 +130,13 @@ supported and will disable that setting and use the opposite).
 ---------------------
 
 The Colorizer plugin can be configured to automatically load when opening a
-new file. Note that this might slow down the loading process, especially on
+new file. This might slow down the loading process, especially on
 the terminal. To enable this, simply set the variable 'g:colorizer_auto_color'
-to 1, e.g. by defining it in your |.vimrc| >
+to 1, e.g. by defining it in your |.vimrc|
+
 
     :let g:colorizer_auto_color = 1
-<
+
 (Not recommended, see below at |Colorizer-hl-ft| for the preferred way)
 
 2.2 Automatically highlight filetypes                     *Colorizer-hl-ft*
@@ -143,10 +144,11 @@ to 1, e.g. by defining it in your |.vimrc| >
 
 If you want to have certain filetypes automatically highlighted, you can use
 the variable g:colorizer_auto_filetype, e.g. to enable highlighting for
-HTML and CSS files by default, add the following to your |.vimrc|: >
+HTML and CSS files by default, add the following to your |.vimrc|:
+
 
     :let g:colorizer_auto_filetype='css,html'
-<
+
 After restarting Vim, the plugin will become active whenever the filetype is
 set to either html or css.
 
@@ -154,10 +156,11 @@ set to either html or css.
 --------------------------
 
 You can skip comments from being colored by setting the variable
-g:colorizer_skip_comments to 1: >
+g:colorizer_skip_comments to 1:
+
 
     :let g:colorizer_skip_comments = 1
-<
+
 The plugin will skip all matches of color codes and names that appear inside
 comments (this only works when syntax highlighting is enabled |:syn-on|)
 
@@ -180,10 +183,11 @@ as there is the foreground color equals the background color. Use
 ------------------------
 
 If for any reason you don't want the plugin to highlight colornames, you can
-prevent this by setting the g:colorizer_colornames variable to 0, e.g. put >
+prevent this by setting the g:colorizer_colornames variable to 0, e.g. put
+
 
     :let g:colorizer_colornames = 0
-<
+
 into your |.vimrc|
 
 2.6 Use X11 colornames                                     *Colorizer-names*
@@ -192,10 +196,11 @@ into your |.vimrc|
 Colorizer can be configured to support all color names defined by the X11
 Window System. By default it only supports the colors defined by the W3C for
 the CSS specification. To use the X11 color names, set the variable
-'g:colorzer_x11_names' to 1, e,g. put in your |.vimrc| >
+'g:colorzer_x11_names' to 1, e,g. put in your |.vimrc|
+
 
     let g:colorizer_x11_names = 1
-<
+
 
 2.7 Use syntax highlighting                                *Colorizer-syntax*
 ---------------------------
@@ -204,24 +209,27 @@ The plugin by default uses the |matchadd()| functions for highlighting colors
 on the fly. Unfortunately, this is a problem, if you want to have the result
 successfully transformed to a HTML file using the |2html.vim| plugin. Therefore,
 the Colorizer plugin can also convert the highlighting to correct syntax
-highlighting. Use either the >
+highlighting. Use either the
+
 
     :ColorHighlight syntax
-<
+
 command (see |:ColorHighlight|) or set the variable 'g:colorizer_syntax' to 1,
-e.g. in your |.vimrc| put >
+e.g. in your |.vimrc| put
+
 
     let g:colorizer_syntax = 1
-<
+
 
 2.8 Specify pattern to highlight                         *Colorizer-pattern*
 --------------------------------
 
 By default, Colorizer detects the following patterns and highlights them as
-hex colors (for better readability it is separated into 3 parts): >
+hex colors (for better readability it is separated into 3 parts):
+
 
         #	%(\x\{3}\|\x\{6}\)	\%(\>\|[-_]\)\@=/'
-<
+
 
 This means it always looks for a '#' followed by either a 3 or 6 hexadecimal
 digits denoting the RGB hex color codes, followed by either the word-boundary
@@ -230,13 +238,14 @@ highlighted (i.e. the RGB color codes).
 
 You can of course specify a different pattern for your needs by setting the
 g:colorizer_hex_pattern variable. e.g. to display '#RRGGBB' and have all of it
-highlighted, use >
+highlighted, use
+
 
         let g:colorizer_hex_pattern = ['#', '\%(\x\{3}\|\x\{6}\)', '']
 
 Make sure to escape special characters (like `/`, as this is used as the
 pattern delimiter internally). E.g. This should work for XQueryColor patterns:
->
+
 	rgb:/a0/a0/a0
         let g:colorizer_hex_pattern = ['rgb:', '\%(\x\x\/\x\x\/\x\x\)', '']
 
@@ -246,7 +255,7 @@ pattern delimiter internally). E.g. This should work for XQueryColor patterns:
 For taskwarrior files, this plugin can also highlight those colors. By
 default, this will only work, if the file name ends with '.theme'
 
-For an example, see this website: 
+For an example, see this website:
 http://taskwarrior.org/news/182
 
 2.10 Colorizing vim syntax files                 *Colorizer-vim-files*
@@ -260,7 +269,8 @@ and highlight them.
 --------------------------
 
 You can add separate colornames to be colored. For this to work, set the
-variable g:colorizer_custom_colors to your liking, e.g. like this: >
+variable g:colorizer_custom_colors to your liking, e.g. like this:
+
 
     let g:colorizer_custom_colors = { 'blue': '#ff0000'}
 
@@ -280,7 +290,8 @@ dumps, the 'filetype' must be empty.
 By default, the colorings will be deleted if you switch to a different buffer
 in the same window by using a *BufLeave* autocommand. However that might
 unintentionally uncolor the current window, so if you experience a problem
-with that, try setting the variable g:colorizer_disable_bufleave like this: >
+with that, try setting the variable g:colorizer_disable_bufleave like this:
+
 
     let g:colorizer_disable_bufleave = 1
 
@@ -288,7 +299,8 @@ with that, try setting the variable g:colorizer_disable_bufleave like this: >
 --------------------------------------
 By default, the auto commands can be cause a performance penalty and make Vim
 appear unresponsive. To disable certain autocommands, you can set the
-variable: >
+variable:
+
 
     let g:colorizer_<autocomand> = 0
 
@@ -308,7 +320,8 @@ leveraging Neovim's virtual text. To do this, you can set:
 2.16 Customizing conceal settings                      *Colorizer-conceal*
 ---------------------------------
 You can customize the 'concealcursor' setting that is applied to the terminal
-coloring by setting the following variable: >
+coloring by setting the following variable:
+
 
     let g:colorizer_conceal_cursor_mode='nvc'
 
@@ -321,11 +334,12 @@ Default: "nv"
 By default, the Colorizer plugin does not map any key, so that it won't
 pollute the global mapping namespace. If you want however to have the
 following default maps set up, set the global variable g:colorizer_auto_map
-in your |.vimrc| like this: >
+in your |.vimrc| like this:
+
 
     :let g:colorizer_auto_map = 1
 
-<
+
 This will set up the following key mappings (if they are not already taken):
 
 Keys            Name                Function
@@ -348,12 +362,13 @@ map the function to a different key.
 
 You can enable the plugin to be loaded for certain filetypes automatically.
 This makes sense for example for CSS files or HTML files. To do so, create the
-following autocommand in your |.vimrc| >
+following autocommand in your |.vimrc|
+
 
     :au BufNewFile,BufRead *.css,*.html,*.htm  :ColorHighlight!
-<
+
 This will automatically highlight all existing color codes and names if you
-edit either a HTML file or a CSS file. Note that this does not update the
+edit either a HTML file or a CSS file. This does not update the
 highlighting, after you have been changing the file.
 
 The recommended way to do this is to use the g:colorizer_auto_filetype
@@ -361,25 +376,27 @@ variable and set this to the desired filetypes. |Colorizer-hl-ft|
 
 If you happen to notice that Colorizer does not work for particular file
 types, you can use the following autocommand that will make sure that
-Colorizer is correctly called for every file type: >
+Colorizer is correctly called for every file type:
+
 
     augroup auto_colorize
     autocmd!
     autocmd FileType * :ColorHighlight
     augroup END
-<
-Note: this may impact startup and (buffer-load) performance.
 
-                                                    *Colorizer-slowdown*
+This may impact startup and (buffer-load) performance.
+
+*Colorizer-slowdown*
 ----------------
 Slow performance
 ----------------
 Depending on your file, any of the highlighting functions might cause an
 performance decrease. This can be analyzed, by setting the variable
-g:colorizer_debug to 1 in e.g. your |.vimrc| like this: >
+g:colorizer_debug to 1 in e.g. your |.vimrc| like this:
+
 
     :let g:colorizer_debug = 1
-<
+
 The next time, you call |:ColorHighlight|, the plugin will output runtime
 statistics, from which you can see, which function caused the slowdowns.
 Consider this output:
@@ -400,18 +417,20 @@ Consider this output:
 
 From this you can see, that the colorname highlighting caused the largest
 slowdown, it took 0.03 seconds to complete. This is expected, as the
-colornames pattern is long and contains many branches. 
+colornames pattern is long and contains many branches.
 
 Functions with a value less then 100 have probably been skipped and were not
 being executed.
 
 If you want to skip certain functions, you can set the variable
 g:colorizer_<name>_disable and then those functions won't be called anymore
-(e.g. do disable the colorname highlighting, put in your |.vimrc| this: >
+(e.g. do disable the colorname highlighting, put in your |.vimrc| this:
+
 
     let g:colorizer_colornames_disable = 1
-<
-name can be any of: >
+
+name can be any of:
+
     - term
     - term_bold
     - term_nroff
@@ -494,8 +513,8 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
 - Allow customization of allowed autocommands
   https://github.com/chrisbra/Colorizer/issues/68
 - Make use of Neovims virtual text
-  https://github.com/chrisbra/Colorizer/issues/70 and 
-  https://github.com/chrisbra/Colorizer/issues/71 and 
+  https://github.com/chrisbra/Colorizer/issues/70 and
+  https://github.com/chrisbra/Colorizer/issues/71 and
 
 0.11 Jan 15, 2015 {{{1
 - use |TextChanged| autocommand if possible
@@ -506,9 +525,9 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
   https://github.com/chrisbra/Colorizer/issues/37, thanks!)
 - Document, how to analyze slowdown |Colorizer-slowdown|
 - |:ColorContrast| would error, if the plugin has not been initialized
-  (reported by Daniel Hahler in 
+  (reported by Daniel Hahler in
   https://github.com/chrisbra/Colorizer/issues/38, thanks!)
-- always define reltime variable (reported by mantislin in 
+- always define reltime variable (reported by mantislin in
   https://github.com/chrisbra/Colorizer/issues/39, thanks!)
 - Only call conceal function once for ansiterm colors
 - reduce calls to DoColor in autocommands (to only do, when something changed)
@@ -607,4 +626,5 @@ looking at my Amazon whishlist: http://www.amazon.de/wishlist/2BKAHE8J7Z6UW
   }}}
 ==============================================================================
 Modeline:
-vim:tw=78:ts=8:ft=help:et:fdm=marker:fdl=0:norl
+DIY_again
+DIY_2  vim:filetype=help:syntax=help:
